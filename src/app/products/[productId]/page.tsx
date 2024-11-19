@@ -1,13 +1,9 @@
-// src/app/products/[productId]/page.tsx
 'use client';
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import { Button_v2 } from "@/components/button/page";
-
-
-import ReactDOM from "react-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 type Product = {
@@ -16,7 +12,7 @@ type Product = {
   description: string;
   price: number;
   thumbnail: string;
-  shippingInformation:string;
+  shippingInformation: string;
 };
 
 export default function ProductDetails({ params }: { params: { productId: string } }) {
@@ -25,9 +21,51 @@ export default function ProductDetails({ params }: { params: { productId: string
   const [error, setError] = React.useState<string | null>(null);
   const router = useRouter();
 
+  // Function to handle Text-to-Speech
+  const handleVoiceOver = () => {
+    if (product && 'speechSynthesis' in window) {
+      const synth = window.speechSynthesis;
+  
+      // Cancel any ongoing speech
+      if (synth.speaking) {
+        synth.cancel();
+      }
+  
+      // Create a new speech instance
+      const speech = new SpeechSynthesisUtterance();
+      speech.text = `
+        Product details are as follows:
+        Title: ${product.title}.
+        Description: ${product.description}.
+        Price: ${product.price} dollars.
+        Shipping Information: ${product.shippingInformation}.
+      `;
+  
+      speech.rate = 1; // Adjust speech rate (0.1 - 2)
+      speech.pitch = 2; // Adjust speech pitch (0 - 2)
+      speech.volume = 1; // Adjust volume (0 - 1)
+  
+      // Handle speech synthesis start and end events
+      speech.onstart = () => {
+        console.log("Speech synthesis started.");
+      };
+      speech.onend = () => {
+        console.log("Speech synthesis finished.");
+      };
+      speech.onerror = (event) => {
+        console.error("Speech synthesis error:", event);
+      };
+  
+      // Play the speech
+      synth.speak(speech);
+    } else {
+      alert('Sorry, your browser does not support voice-over functionality.');
+    }
+  };
+  
 
-  //for countdown timer
-  function renderTime({ remainingTime }:{remainingTime:any}) {
+  // Function for countdown timer
+  function renderTime({ remainingTime }: { remainingTime: any }) {
     if (remainingTime === 0) {
       return <div className="timer font-mono font-bold">Too late...</div>;
     }
@@ -35,7 +73,7 @@ export default function ProductDetails({ params }: { params: { productId: string
     return (
       <div className="timer flex flex-col items-center">
         <div className="text">Remaining</div>
-        <div className="value font-bold  text-5xl">{remainingTime}</div>
+        <div className="value font-bold text-5xl">{remainingTime}</div>
         <div className="text">seconds</div>
       </div>
     );
@@ -83,20 +121,22 @@ export default function ProductDetails({ params }: { params: { productId: string
               <h1 className="text-2xl font-semibold mb-2 text-center sm:text-left">{product.title}</h1>
               <p className="text-gray-600 mb-4">{product.description}</p>
               <p className="text-lg font-semibold text-green-500 mb-6">${product.price}</p>
-              <div className="items-center  flex flex-col mb-10">
-              <p className="text-lg font-semibold text-gray-600 mb-6">{product.shippingInformation} if ordered within</p>
+              <div className="items-center flex flex-col mb-10">
+                <p className="text-lg font-semibold text-gray-600 mb-6">
+                  {product.shippingInformation} if ordered within
+                </p>
                 <div className="timer-wrapper font-mono items-center flex-col">
                   <CountdownCircleTimer
                     isPlaying
                     duration={120}
-                    colors={["#563A9C", "#8B5DFF", "#FAB12F", "#FF8000", "#FA4032", "#AF1740" ]}
+                    colors={["#563A9C", "#8B5DFF", "#FAB12F", "#FF8000", "#FA4032", "#AF1740"]}
                     colorsTime={[120, 80, 40, 20, 10, 5]}
                     onComplete={() => ({ shouldRepeat: false, delay: 1 })}
                   >
                     {renderTime}
                   </CountdownCircleTimer>
-                </div></div>
-             
+                </div>
+              </div>
 
               {/* QR Code Section */}
               <div className="mt-4 flex flex-col items-center sm:flex-row gap-4">
@@ -110,8 +150,19 @@ export default function ProductDetails({ params }: { params: { productId: string
 
           {/* Action Buttons */}
           <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 font-mono">
-            <Button_v2 className="w-full sm:w-auto bg-blue-500 text-white shadow-lg">Add to Cart</Button_v2>
-            <Button_v2 className="w-full sm:w-auto bg-green-500 text-white shadow-lg" onClick={() => router.push('/product-list')}>
+            <Button_v2
+              onClick={handleVoiceOver} // Voice-Over Button
+              className="w-full sm:w-auto bg-purple-500 text-white shadow-lg"
+            >
+              Play Description
+            </Button_v2>
+            <Button_v2 className="w-full sm:w-auto bg-blue-500 text-white shadow-lg">
+              Add to Cart
+            </Button_v2>
+            <Button_v2
+              className="w-full sm:w-auto bg-green-500 text-white shadow-lg"
+              onClick={() => router.push('/product-list')}
+            >
               Back to Products
             </Button_v2>
           </div>
