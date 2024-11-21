@@ -6,6 +6,8 @@ import { QRCodeSVG } from "qrcode.react";
 import { Button_v2 } from "@/components/button/page";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
+import { SkeletonCard } from "@/components/skeletons/page";
+
 type Product = {
   id: string;
   title: string;
@@ -98,7 +100,7 @@ export default function ProductDetails({ params }: { params: { productId: string
     fetchProduct();
   }, [params.productId]);
 
-  if (loading) return <p className="text-center">Loading...</p>;
+  if (loading) return <div className="flex flex-col items-center mt-10"><SkeletonCard></SkeletonCard></div>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   // Product URL for QR code
