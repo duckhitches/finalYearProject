@@ -5,7 +5,7 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
  
-    // measurementId: "G-67DPBDYWTJ"
+  
 };
 
 const app = initializeApp(firebaseConfig);
