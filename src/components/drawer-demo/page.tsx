@@ -44,7 +44,7 @@ export function InstructionDrawer({ productId }: { productId: string }) {
       <DrawerTrigger asChild>
         <Button_v2 className="font-mono">Get details</Button_v2>
       </DrawerTrigger>
-      <DrawerContent className="mx-auto flex flex-col items-center w-full max-w-md sm:max-w-lg p-4 sm:p-6 bg-red-400 rounded-md font-mono">
+      <DrawerContent className="mx-auto flex flex-col items-center w-full max-w-md sm:max-w-lg p-4 sm:p-6 dark:bg-slate-600 bg-red-400 rounded-md font-mono">
         <DrawerHeader>
           <DrawerTitle className="text-xl sm:text-2xl font-semibold text-center">Product Details</DrawerTitle>
         </DrawerHeader>

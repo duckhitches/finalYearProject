@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
 
@@ -21,7 +21,15 @@ export default function RootLayout({
       <body
         className={` antialiased`}
       >
-         {children}
+         <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        
        
       </body>
     </html>
