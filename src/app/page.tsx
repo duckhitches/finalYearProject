@@ -44,15 +44,24 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="vh-100 col-span-1 items-center justify-center space-y-8 bg-red-300 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div className="vh-100 col-span-1 items-center justify-center space-y-8 bg-red-300 dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-hidden">
       <header className="flex items-center justify-between px-6 py-4 bg-background shadow-md dark:bg-gray-800">
-        <GradualSpacing text="Welcome to Shopify" />
-       
-        <div className="items-end">
-          <Login />
+        {/* Left Section: Welcome Message */}
+        <div className="flex items-center">
+          <GradualSpacing text="Welcome to Shopify" />
         </div>
-        <div className="items-end shadow-lg border-l-background"><ModeToggle /></div>
+
+        {/* Right Section: Login and Mode Toggle */}
+        <div className="flex items-center space-x-4">
+
+
+          {/* Mode Toggle */}
+          <div>
+            <ModeToggle />
+          </div>
+        </div>
       </header>
+      <Login />
 
       <header className="flex flex-col items-center justify-content-center p-3 mt-2 mb-10 gap-6 dark:border-gray-700">
         <NavigationMenu className="font-mono">
