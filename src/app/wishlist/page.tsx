@@ -3,7 +3,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "@/lib/firebaseConfig";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Button_v2, Button_v5 } from "@/components/button/page";
+import { Button_v2 } from "@/components/button/page";
 
 export default function Wishlist() {
   const [wishlist, setWishlist] = useState<any[]>([]);

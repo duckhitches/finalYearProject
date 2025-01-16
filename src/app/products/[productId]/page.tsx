@@ -36,7 +36,7 @@ const WishlistButton = ({ product }: { product: Product }) => {
     try {
       const wishlistRef = doc(db, "wishlists", user.uid);
       const wishlistSnapshot = await getDoc(wishlistRef);
-      let wishlist = wishlistSnapshot.exists()
+      const wishlist = wishlistSnapshot.exists()
         ? wishlistSnapshot.data().items
         : [];
   

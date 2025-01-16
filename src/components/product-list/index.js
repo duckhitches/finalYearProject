@@ -9,7 +9,6 @@ import {
   Card,
   CardContent,
 } from "@/components/ui/card";
-import Link from "next/link";
 import { TextFade } from "../welcome-page/page";
 import {
   HoverCard,
@@ -31,7 +30,7 @@ import {
 import { Button_v2 } from "../button/page";
 
 export default function ProductList({ productList }) {
-  const [products, setProducts] = useState(productList);
+  const [products] = useState(productList);
   const router = useRouter();
 
   return (
