@@ -48,8 +48,8 @@ const WishlistButton = ({ product }: { product: Product }) => {
       } else {
         alert("Product already in wishlist!");
       }
-    } catch (error) {
-      console.error("Error adding to wishlist:", error);
+    } catch (err) {
+      console.error("Error adding to wishlist:", err);
     }
   };
 

@@ -30,7 +30,7 @@ export function InstructionDrawer({ productId }: { productId: string }) {
       if (!apiResponse.ok) throw new Error("Failed to fetch product data.");
       const data = await apiResponse.json();
       setInstructions(data.description);
-    } catch (error) {
+    } catch (err) {
       setError("Failed to fetch instructions.");
     } finally {
       setLoading(false);
