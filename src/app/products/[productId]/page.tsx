@@ -131,7 +131,7 @@ export default function ProductDetails({ params }: { params: { productId: string
   if (loading) return <div className="mt-10"><SkeletonCard /></div>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
-  const productUrl = `http://localhost:3000/products/${params.productId}`;
+  const productUrl = `https://final-year-project-cdv008-hehe.vercel.app/products/${params.productId}`;
 
   return (
     <div className="mx-auto max-w-screen-lg p-4 sm:p-8 shadow-lg">
