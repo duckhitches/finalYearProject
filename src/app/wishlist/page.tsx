@@ -45,7 +45,7 @@ export default function Wishlist() {
 
   const shareWishlist = () => {
     if (navigator.share) {
-      const url = `https://your-app.com/wishlist/${user?.uid}`;
+      const url = `https://final-year-project-duckhitches-projects.vercel.app/wishlist/${user?.uid}`;
       navigator.share({
         title: "My Wishlist",
         text: "Check out my wishlist!",
@@ -53,7 +53,7 @@ export default function Wishlist() {
       });
     } else {
       alert(
-        "Sharing not supported on your device. Copy this link instead: https://your-app.com/wishlist/" +
+        "Sharing not supported on your device. Copy this link instead: https://final-year-project-duckhitches-projects.vercel.app/wishlist/" +
           user?.uid
       );
     }
